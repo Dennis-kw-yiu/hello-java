@@ -31,12 +31,12 @@ pipeline {
             steps {
                 // This creates a separate folder to clone the Spring Boot app to
                 sh "mkdir ${appFolder}"
-                dir(appFolder) {
-                    git url: "${appSourceUrl}", branch: "${appSourceRef}"
-                }
+//                 dir(appFolder) {
+//                     git url: "${appSourceUrl}", branch: "${appSourceRef}"
+//                 }
             }
         }
-        stage("Get Version from POM") {
+        /*stage("Get Version from POM") {
             steps {
                 script {
                     dir(appFolder) {
@@ -45,7 +45,7 @@ pipeline {
                 }
             }
         }
-        /*stage("S2I Build") {
+        stage("S2I Build") {
             steps {
                 // This installs or upgrades the spring-boot-build Helm chart.
                 // It creates or updates your application's BuildConfig and ImageStream
@@ -68,13 +68,13 @@ pipeline {
                     sh "helm upgrade --install ${appName} .helm/spring-boot --set tag=${tag} --wait"
                 }
             }
-        }*/
+        }
         stage("Docker Build") {
             steps {
                 dir(appFolder) {
                     binaryBuild(buildConfigName: appName, buildFromPath: ".")
                 }
             }
-        }
+        }*/
     }
 }
